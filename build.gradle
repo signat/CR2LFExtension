@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+     mavenCentral()
+}
+
+dependencies {    
+    compileOnly 'net.portswigger.burp.extensions:montoya-api:+'
+}
+
+sourceSets {
+    main {
+        java {            
+            srcDir 'src'
+        }
+    }
+}
+
+jar {
+    from {
+        duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
